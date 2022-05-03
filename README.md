@@ -9,9 +9,7 @@ This repository contains projects intended to teach the fundamentals of Flutter 
 Installation on Windows:
 -----
 
-```
 [See the Flutter docs for full installation instructions](https://docs.flutter.dev/get-started/install/windows)
-```
 
 Contributor
 <br>
