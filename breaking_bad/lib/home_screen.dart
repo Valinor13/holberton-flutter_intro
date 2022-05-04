@@ -1,7 +1,7 @@
-import 'dart:convert';
-import 'models.dart';
-import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
+import 'dart:convert';
+import 'package:http/http.dart' as http;
+import 'models.dart';
 import 'character_tile.dart';
 
 // HomeScreen - class that renders the home page

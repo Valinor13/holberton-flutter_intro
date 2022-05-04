@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'quotes_screen.dart';
 import 'models.dart';
 
 class CharacterTile extends StatelessWidget {
@@ -8,9 +9,21 @@ class CharacterTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GridTile(
-      child: Image.network(
-        character.imgUrl,
-        fit: BoxFit.cover,
+      child: GestureDetector(
+        onTap: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => QuotesScreen(
+                name: character.name,
+              ),
+            ),
+          );
+        },
+        child: Image.network(
+          character.imgUrl,
+          fit: BoxFit.cover,
+        )
       ),
       footer: GridTileBar(
         title: Text(
