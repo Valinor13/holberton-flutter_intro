@@ -8,7 +8,20 @@ class CharacterTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GridTile(
-      child: Text(character.imgUrl),
+      child: Image.network(
+        character.imgUrl,
+        fit: BoxFit.cover,
+      ),
+      footer: GridTileBar(
+        title: Text(
+          character.name,
+          textAlign: TextAlign.left,
+          style: const TextStyle(
+            color: Colors.white,
+            fontSize: 30,
+          ),
+        ),
+      ),
     );
   }
 }

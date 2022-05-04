@@ -12,7 +12,7 @@ class Character {
 
   Character.fromJson(Map<String, dynamic> json) {
     name = json['name'];
-    imgUrl = json['imgUrl'];
-    id = json['id'];
+    imgUrl = json['img'];
+    id = json['char_id'];
   }
 }
