@@ -7,15 +7,23 @@ class QuotesScreen extends StatelessWidget {
 
   final String name;
 
-  Future<String> fetchQuote(String name) async {
+  Future<List<String>> fetchQuote(String name) async {
     final names = name.split(' ');
     final first = names[0];
     final last = names[1];
-    final response = await http.get(Uri.parse(
-        'https://breakingbadapi.com/api/quote/random?author=$first+$last'));
+    final response = await http.get(
+        Uri.parse('https://breakingbadapi.com/api/quote?author=$first+$last'));
     if (response.statusCode == 200) {
-      final quoteData = json.decode(response.body);
-      return quoteData[0]['quote'];
+      final quoteData = jsonDecode(response.body);
+      List<String> quotes = [];
+      for (var quote in quoteData) {
+        quotes.add(quote['quote']);
+      }
+      if (quotes != []) {
+        return quotes;
+      } else {
+        return ['No quotes found for $name'];
+      }
     } else {
       throw Exception('Failed to load characters');
     }
@@ -40,11 +48,19 @@ class QuotesScreen extends StatelessWidget {
                   child: Text('Error'),
                 );
               } else {
-                return ListView.builder(
-                  itemCount: 1,
+                return ListView.separated(
+                  separatorBuilder: (context, index) =>
+                      const SizedBox(height: 25),
+                  itemCount: snapshot.data.length,
                   itemBuilder: (BuildContext context, int index) {
                     return ListTile(
-                      title: Text(snapshot.data?.toString() ?? ''),
+                      title: Text(
+                        snapshot.data?[index],
+                        style: const TextStyle(
+                          fontSize: 36,
+                          backgroundColor: Color(0xFFFAFAFA),
+                        ),
+                      ),
                     );
                   },
                 );
