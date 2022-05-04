@@ -9,20 +9,20 @@ class QuotesScreen extends StatelessWidget {
 
   Future<List<String>> fetchQuote(String name) async {
     final names = name.split(' ');
-    final first = names[0];
-    final last = names[1];
+    final authorName = names.join('+');
     final response = await http.get(
-        Uri.parse('https://breakingbadapi.com/api/quote?author=$first+$last'));
+        Uri.parse('https://breakingbadapi.com/api/quote?author=$authorName'));
     if (response.statusCode == 200) {
       final quoteData = jsonDecode(response.body);
       List<String> quotes = [];
       for (var quote in quoteData) {
         quotes.add(quote['quote']);
       }
-      if (quotes != []) {
+      if (quotes.isNotEmpty) {
         return quotes;
       } else {
-        return ['No quotes found for $name'];
+        quotes.add('There were no quotes found for $name');
+        return quotes;
       }
     } else {
       throw Exception('Failed to load characters');
