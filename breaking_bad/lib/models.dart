@@ -1,8 +1,14 @@
 // Character - class to inform character information
 class Character {
-  String? name;
-  String? imgUrl;
-  int? id;
+  late String name;
+  late String imgUrl;
+  late int id;
+
+  Character({
+    required this.name,
+    required this.imgUrl,
+    required this.id,
+  });
 
   Character.fromJson(Map<String, dynamic> json) {
     name = json['name'];
